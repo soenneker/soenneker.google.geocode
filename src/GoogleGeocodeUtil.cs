@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Soenneker.Google.Geocode.Abstract;
 using System.Threading.Tasks;
@@ -23,14 +24,7 @@ public class GoogleGeocodeUtil : IGoogleGeocodeUtil
         _apiKey = config.GetValueStrict<string>("Google:Geocode:ApiKey");
     }
 
-    public async ValueTask<string?> GetPlaceId(string address, CancellationToken cancellationToken = default)
-    {
-        Result? result = await GetResult(address, cancellationToken).NoSync();
-
-        return result?.PlaceId;
-    }
-
-    public async ValueTask<Result?> GetResult(string address, CancellationToken cancellationToken = default)
+    public async ValueTask<List<Result>?> GetResults(string address, CancellationToken cancellationToken = default)
     {
         var geocodeRequest = new AddressGeocodeRequest
         {
@@ -40,6 +34,20 @@ public class GoogleGeocodeUtil : IGoogleGeocodeUtil
 
         GeocodeResponse? geocodeResponse = await GoogleMaps.Geocode.AddressGeocode.QueryAsync(geocodeRequest, cancellationToken).NoSync();
 
-        return geocodeResponse?.Results.FirstOrDefault();
+        return geocodeResponse?.Results.ToList();
+    }
+
+    public async ValueTask<Result?> GetResult(string address, CancellationToken cancellationToken = default)
+    {
+        List<Result>? results = await GetResults(address, cancellationToken).NoSync();
+
+        return results?.FirstOrDefault();
+    }
+
+    public async ValueTask<string?> GetPlaceId(string address, CancellationToken cancellationToken = default)
+    {
+        Result? result = await GetResult(address, cancellationToken).NoSync();
+
+        return result?.PlaceId;
     }
 }

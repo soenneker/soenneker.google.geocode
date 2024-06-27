@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using System.Threading;
 using GoogleApi.Entities.Maps.Geocoding.Common;
+using System.Collections.Generic;
 
 namespace Soenneker.Google.Geocode.Abstract;
 
@@ -9,6 +10,8 @@ namespace Soenneker.Google.Geocode.Abstract;
 /// </summary>
 public interface IGoogleGeocodeUtil
 {
+    ValueTask<List<Result>?> GetResults(string address, CancellationToken cancellationToken = default);
+
     ValueTask<Result?> GetResult(string address, CancellationToken cancellationToken = default);
 
     ValueTask<string?> GetPlaceId(string address, CancellationToken cancellationToken = default);
