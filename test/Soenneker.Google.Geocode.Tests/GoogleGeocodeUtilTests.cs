@@ -1,9 +1,6 @@
-using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
 using Soenneker.Google.Geocode.Abstract;
 using Soenneker.Tests.FixturedUnit;
 using Xunit;
-
 
 namespace Soenneker.Google.Geocode.Tests;
 
@@ -15,5 +12,11 @@ public class GoogleGeocodeUtilTests : FixturedUnitTest
     public GoogleGeocodeUtilTests(Fixture fixture, ITestOutputHelper output) : base(fixture, output)
     {
         _util = Resolve<IGoogleGeocodeUtil>(true);
+    }
+
+    [Fact]
+    public void Default()
+    {
+
     }
 }
