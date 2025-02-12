@@ -1,5 +1,4 @@
-﻿```
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Soenneker.Google.Geocode.Abstract;
 
@@ -28,4 +27,3 @@ public static class GoogleGeocodeUtilRegistrar
         return services;
     }
 }
-```
