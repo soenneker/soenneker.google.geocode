@@ -1,4 +1,4 @@
-# Contributing to Soenneker.Google.Geocode
+﻿# Contributing to Soenneker.Google.Geocode
 
 We're excited that you're interested in contributing!
 
