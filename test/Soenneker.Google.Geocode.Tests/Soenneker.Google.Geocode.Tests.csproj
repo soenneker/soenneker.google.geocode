@@ -27,7 +27,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Soenneker.Google.Geocode.csproj" />
+        <ProjectReference Include="..\..\src\Soenneker.Google.Geocode\Soenneker.Google.Geocode.csproj" />
     </ItemGroup>
 
     <ItemGroup>
