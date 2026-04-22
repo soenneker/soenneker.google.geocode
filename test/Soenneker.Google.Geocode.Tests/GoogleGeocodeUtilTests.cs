@@ -1,20 +1,19 @@
 using Soenneker.Google.Geocode.Abstract;
-using Soenneker.Tests.FixturedUnit;
-using Xunit;
+using Soenneker.Tests.HostedUnit;
 
 namespace Soenneker.Google.Geocode.Tests;
 
-[Collection("Collection")]
-public class GoogleGeocodeUtilTests : FixturedUnitTest
+[ClassDataSource<Host>(Shared = SharedType.PerTestSession)]
+public class GoogleGeocodeUtilTests : HostedUnitTest
 {
     private readonly IGoogleGeocodeUtil _util;
 
-    public GoogleGeocodeUtilTests(Fixture fixture, ITestOutputHelper output) : base(fixture, output)
+    public GoogleGeocodeUtilTests(Host host) : base(host)
     {
         _util = Resolve<IGoogleGeocodeUtil>(true);
     }
 
-    [Fact]
+    [Test]
     public void Default()
     {
 
