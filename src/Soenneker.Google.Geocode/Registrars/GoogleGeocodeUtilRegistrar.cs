@@ -12,6 +12,8 @@ public static class GoogleGeocodeUtilRegistrar
     /// <summary>
     /// Adds <see cref="IGoogleGeocodeUtil"/> as a singleton service. <para/>
     /// </summary>
+    /// <param name="services">Service collection that receives the registration.</param>
+    /// <returns>The same service collection, so additional registrations can be chained.</returns>
     public static IServiceCollection AddGoogleGeocodeUtilAsSingleton(this IServiceCollection services)
     {
         services.TryAddSingleton<IGoogleGeocodeUtil, GoogleGeocodeUtil>();
@@ -21,6 +23,8 @@ public static class GoogleGeocodeUtilRegistrar
     /// <summary>
     /// Adds <see cref="IGoogleGeocodeUtil"/> as a scoped service. <para/>
     /// </summary>
+    /// <param name="services">Service collection that receives the registration.</param>
+    /// <returns>The same service collection, so additional registrations can be chained.</returns>
     public static IServiceCollection AddGoogleGeocodeUtilAsScoped(this IServiceCollection services)
     {
         services.TryAddScoped<IGoogleGeocodeUtil, GoogleGeocodeUtil>();

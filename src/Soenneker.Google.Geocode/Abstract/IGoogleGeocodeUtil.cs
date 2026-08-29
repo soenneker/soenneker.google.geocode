@@ -13,24 +13,24 @@ public interface IGoogleGeocodeUtil
     /// <summary>
     /// Gets results.
     /// </summary>
-    /// <param name="address">The address.</param>
-    /// <param name="cancellationToken">The cancellation token.</param>
-    /// <returns>A task containing the result of the operation.</returns>
+    /// <param name="address">Address for the get results operation.</param>
+    /// <param name="cancellationToken">Token used to cancel the operation.</param>
+    /// <returns>A task whose result is the collection returned by get Results.</returns>
     ValueTask<List<Result>?> GetResults(string address, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets result.
     /// </summary>
-    /// <param name="address">The address.</param>
-    /// <param name="cancellationToken">The cancellation token.</param>
-    /// <returns>A task containing the result of the operation.</returns>
+    /// <param name="address">Address for the get result operation.</param>
+    /// <param name="cancellationToken">Token used to cancel the operation.</param>
+    /// <returns>A task whose result is the requested result.</returns>
     ValueTask<Result?> GetResult(string address, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets place id.
     /// </summary>
-    /// <param name="address">The address.</param>
-    /// <param name="cancellationToken">The cancellation token.</param>
-    /// <returns>A task containing the result of the operation.</returns>
+    /// <param name="address">Address for the get place id operation.</param>
+    /// <param name="cancellationToken">Token used to cancel the operation.</param>
+    /// <returns>A task whose result is the text returned by get Place ID.</returns>
     ValueTask<string?> GetPlaceId(string address, CancellationToken cancellationToken = default);
 }
