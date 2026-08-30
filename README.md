@@ -5,7 +5,7 @@
 
 # Soenneker.Google.Geocode
 
-A utility library for Google Geocode API operations.
+A small DI-ready wrapper around Google Maps address geocoding for retrieving all matches, the first match, or its place ID.
 
 ## Install
 
@@ -13,26 +13,54 @@ A utility library for Google Geocode API operations.
 dotnet add package Soenneker.Google.Geocode
 ```
 
-## Quick start
+## Configuration
+
+```json
+{
+  "Google": {
+    "Geocode": {
+      "ApiKey": "<Google Maps API key>"
+    }
+  }
+}
+```
+
+Enable the Geocoding API for the key and restrict the key appropriately for the application that uses it.
+
+## Register
 
 ```csharp
 using Soenneker.Google.Geocode.Registrars;
 using Microsoft.Extensions.DependencyInjection;
 
-var services = new ServiceCollection();
-var result = services.AddGoogleGeocodeUtilAsSingleton();
+services.AddGoogleGeocodeUtilAsScoped();
 ```
 
-Adds `IGoogleGeocodeUtil` as a singleton service.
+Singleton registration is also available through `AddGoogleGeocodeUtilAsSingleton()`; the implementation is stateless after reading its API key.
 
-## What you get
+## Usage
 
-- `IGoogleGeocodeUtil` — A utility library for Google Geocode API operations.
-- `GoogleGeocodeUtilRegistrar` — A utility library for Google Geocode API operations.
+```csharp
+Result? result = await geocode.GetResult(
+    "1600 Amphitheatre Parkway, Mountain View, CA",
+    cancellationToken);
+
+if (result is not null)
+    Console.WriteLine($"{result.FormattedAddress} ({result.PlaceId})");
+```
+
+Use `GetResults()` when every Google candidate matters. `GetResult()` returns Google's first candidate, and `GetPlaceId()` returns that candidate's place ID directly.
 
 ## API at a glance
 
 | API | What it does | Result / important behavior |
 | --- | --- | --- |
-| `GoogleGeocodeUtilRegistrar.AddGoogleGeocodeUtilAsSingleton(services)` | Adds `IGoogleGeocodeUtil` as a singleton service. | The same service collection, so additional registrations can be chained. |
-| `GoogleGeocodeUtilRegistrar.AddGoogleGeocodeUtilAsScoped(services)` | Adds `IGoogleGeocodeUtil` as a scoped service. | The same service collection, so additional registrations can be chained. |
+| `GetResults(address)` | Sends an address-geocoding request. | Returns Google's candidates in response order, or `null` if no response is produced. |
+| `GetResult(address)` | Gets the first candidate. | Returns `null` when no candidate exists. |
+| `GetPlaceId(address)` | Gets the first candidate's place ID. | Returns `null` when no candidate exists. |
+
+## Behavior
+
+- The address is sent to Google as provided; this package does not normalize or validate it locally.
+- A first result is not a guarantee of an exact match. Inspect the full `Result` when match quality matters.
+- Google API and transport failures propagate to the caller. Cancellation is forwarded to the request.

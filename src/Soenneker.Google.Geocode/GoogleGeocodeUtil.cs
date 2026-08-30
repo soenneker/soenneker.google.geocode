@@ -14,8 +14,7 @@ using Soenneker.Extensions.Task;
 
 namespace Soenneker.Google.Geocode;
 
-/// <inheritdoc cref="IGoogleGeocodeUtil"/>
-public class GoogleGeocodeUtil : IGoogleGeocodeUtil
+public sealed class GoogleGeocodeUtil : IGoogleGeocodeUtil
 {
     private readonly string _apiKey;
 

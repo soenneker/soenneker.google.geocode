@@ -5,7 +5,7 @@ using Soenneker.Google.Geocode.Abstract;
 namespace Soenneker.Google.Geocode.Registrars;
 
 /// <summary>
-/// A utility library for Google Geocode API operations
+/// Registers the Google Maps geocoding utility.
 /// </summary>
 public static class GoogleGeocodeUtilRegistrar
 {

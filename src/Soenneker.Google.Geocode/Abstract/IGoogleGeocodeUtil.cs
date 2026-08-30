@@ -6,31 +6,31 @@ using System.Collections.Generic;
 namespace Soenneker.Google.Geocode.Abstract;
 
 /// <summary>
-/// A utility library for Google Geocode API operations
+/// Provides address lookups through the Google Maps Geocoding API.
 /// </summary>
 public interface IGoogleGeocodeUtil
 {
     /// <summary>
-    /// Gets results.
+    /// Gets every geocoding candidate returned for an address.
     /// </summary>
-    /// <param name="address">Address for the get results operation.</param>
+    /// <param name="address">The address sent to Google.</param>
     /// <param name="cancellationToken">Token used to cancel the operation.</param>
-    /// <returns>A task whose result is the collection returned by get Results.</returns>
+    /// <returns>The candidates in Google response order, or <see langword="null"/> when no response is produced.</returns>
     ValueTask<List<Result>?> GetResults(string address, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Gets result.
+    /// Gets the first geocoding candidate returned for an address.
     /// </summary>
     /// <param name="address">Address for the get result operation.</param>
     /// <param name="cancellationToken">Token used to cancel the operation.</param>
-    /// <returns>A task whose result is the requested result.</returns>
+    /// <returns>The first candidate, or <see langword="null"/> when none exists.</returns>
     ValueTask<Result?> GetResult(string address, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Gets place id.
+    /// Gets the place ID from the first geocoding candidate returned for an address.
     /// </summary>
     /// <param name="address">Address for the get place id operation.</param>
     /// <param name="cancellationToken">Token used to cancel the operation.</param>
-    /// <returns>A task whose result is the text returned by get Place ID.</returns>
+    /// <returns>The first candidate's place ID, or <see langword="null"/> when none exists.</returns>
     ValueTask<string?> GetPlaceId(string address, CancellationToken cancellationToken = default);
 }
