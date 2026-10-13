@@ -21,7 +21,7 @@ public sealed class GoogleGeocodeUtil : IGoogleGeocodeUtil
 
     public GoogleGeocodeUtil(IConfiguration config)
     {
-        _apiKey = config.GetValueStrict<string>("Google:Geocode:ApiKey");
+        _apiKey = config.GetStringStrict("Google:Geocode:ApiKey");
     }
 
     public async ValueTask<List<Result>?> GetResults(string address, CancellationToken cancellationToken = default)
